@@ -3,6 +3,7 @@
 // initial song music is played
 // on win -> song changes to artist, picture updates, song title and artist are displayed, game resets
 // duplicate letters - how handle this logic
+// remove commas from letters guessed and increase space between -- or do board like the fridge example
 
 // ********************************************************************** DOCUMENT OBJECTS *************************************************************** //
 
@@ -115,7 +116,6 @@
             ind = cgN.indexOf(" "); 
             charNum.splice(ind, 1, " | ");
             wordUp();
-
         }
         else {
             wordUp();
@@ -132,25 +132,34 @@
     }
 
     // increases win counter by 1
-    var winCount = (function() {
-        var winCounter = 0;
-        const winText = document.getElementById("wins");  
-        winText.innerText = winCounter;
-        return function() {winCounter += 1; return winCounter}
-    })();
+    var winCount = function() {
+        let winCounter = 0;
+        return function() {
+            winCounter += 1; 
+            const winText = document.getElementById("wins");  
+            winText.innerText = winCounter;
+            return winCounter;
+        }
+    }();
+
+    // evaluates if the user has won or not
+    var winEval = function() {
+        if ( ! charNum.includes("_" || "|")) {
+            console.log("win");
+            winCount(); // will call win() instead
+        }
+        else {
+            console.log("keep going");
+        }
+    }
+
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------ //
 
 
 // ********************************************************************** GAME LOOP ********************************************************************* //
 
-
-
 initialize()
-
-
-
-
 
 // when a key is pressed
 document.onkeyup = function (event) {
@@ -166,7 +175,6 @@ document.onkeyup = function (event) {
             // final guess doesn't match
             if (guessesRem === 1 && ! cgN.includes(userGuess)) {
                 alert("'" + userGuess + "' is incorrect. You're out of guesses, you lose!")
-                reset();
             }
 
             // letter matches a letter(s) in artist name
@@ -175,10 +183,11 @@ document.onkeyup = function (event) {
                 for (var j = 0; j < (cgN.length); j++) {
                     if (cgN[j] === userGuess) {
                         charNum[j] = userGuess;
-                        wordUp();                      
+                        wordUp();     
+                        winEval();                 
                     }
                 }
-                }
+            }
 
             // validation criteria met but guess doesn't match
             else {
