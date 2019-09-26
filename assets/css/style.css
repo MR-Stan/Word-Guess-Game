@@ -1,6 +1,8 @@
 body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: cadetblue;
+    color: white;
 }
 
 p {
@@ -8,3 +10,7 @@ p {
     padding: 2%;
 }
 
+img {
+    border-radius: 80%;
+    border: 2px solid white;
+}
