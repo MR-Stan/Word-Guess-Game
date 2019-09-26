@@ -3,10 +3,10 @@
 // on win -> song changes to artist, picture updates, song title and artist are displayed, game resets
 // last key pressed is showing up on next round
 // remove commas from letters guessed and increase space between -- or do board like the fridge example
-// no repeat until all songs have been picked
+// no repeat until all songs have been picked - define artists array in initialze, after computerGuess is chosen remove the item from artists array
 // function to convert array to string and uppercase it. 
 // need to print uppercase guesses
-// add images to object
+// add music to object
 
 
 // ********************************************************************** DOCUMENT OBJECTS *************************************************************** //
@@ -51,90 +51,96 @@
     const alphaArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
     // ****** ARTISTS ****** //
+    function Artist (name, song, audio, image) {
+        this.name = name
+        this.song = song
+        this.audio = audio
+        this.image = image
+    }
 
-    const art1 = {
-        name: "Deep Purple", 
-        song: "Smoke on the Water", 
-        audio: "", 
-        img: "<img src='assets/images/artists/deepPurple.jpg' alt='Deep Purple album cover'>"
-};
+    const art1 = new Artist (
+        "Deep Purple", 
+        "Smoke on the Water", 
+        "", 
+        "<img src='assets/images/artists/deepPurple.jpg' alt='Deep Purple album cover'>"
+    )
 
-    const art2 = {
-        name: "Queen", 
-        song: "Bohemian Rhapsody", 
-        audio: "", 
-        img: "<img src='assets/images/artists/queen.jpg' alt='Queen album cover'>"
-};
+    const art2 = new Artist (
+        "Queen", 
+        "Bohemian Rhapsody", 
+        "", 
+        "<img src='assets/images/artists/queen.jpg' alt='Queen album cover'>"
+    )
     
-    const art3 = {
-        name: "Pink Floyd", 
-        song: "Comfortably Numb", 
-        audio: "", 
-        img: "<img src='assets/images/artists/pinkFloyd.png' alt='Pink Floyd album cover'>"
-};
+    const art3 = new Artist (
+        "Pink Floyd", 
+        "Comfortably Numb", 
+        "", 
+        "<img src='assets/images/artists/pinkFloyd.png' alt='Pink Floyd album cover'>"
+    )
 
-    const art4 = {
-        name: "Led Zeppelin", 
-        song: "Black Dog", 
-        audio: "", 
-        img: "<img src='assets/images/artists/ledZeppelin.jpg' alt='Led Zeppelin album cover'>"
-};
+    const art4 = new Artist (
+        "Led Zeppelin", 
+        "Black Dog", 
+        "", 
+        "<img src='assets/images/artists/ledZeppelin.jpg' alt='Led Zeppelin album cover'>"
+    )
 
-    const art5 = {
-        name: "Eric Clapton", 
-        song: "Layla", 
-        audio: "", 
-        img: "<img src='assets/images/artists/ericClapton.jpg' alt='Eric Clapton album cover'>"
-};
+    const art5 = new Artist (
+        "Eric Clapton", 
+        "Layla", 
+        "", 
+        "<img src='assets/images/artists/ericClapton.jpg' alt='Eric Clapton album cover'>"
+    )
 
-    const art6 = {
-        name: "The Who", 
-        song: "Baba O'Riley", 
-        audio: "", 
-        img: "<img src='assets/images/artists/theWho.jpg' alt='The Who album cover'>"
-};
+    const art6 = new Artist (
+        "The Who", 
+        "Baba O'Riley", 
+        "", 
+        "<img src='assets/images/artists/theWho.jpg' alt='The Who album cover'>"
+    )
 
-    const art7 = {
-        name: "Santana", 
-        song: "Black Magic Woman", 
-        audio: "", 
-        img: "<img src='assets/images/artists/santana.jpg' alt='Santana album cover'>"
-};
+    const art7 = new Artist (
+        "Santana", 
+        "Black Magic Woman", 
+        "", 
+        "<img src='assets/images/artists/santana.jpg' alt='Santana album cover'>"
+    )
 
-    const art8 = {
-        name: "Lynyrd Skynyrd", 
-        song: "Sweet Home Alabama", 
-        audio: "", 
-        img: "<img src='assets/images/artists/lynyrdSkynyrd.jpg' alt='Lynyrd Skynyrd album cover'>"
-};
+    const art8 = new Artist (
+        "Lynyrd Skynyrd", 
+        "Sweet Home Alabama", 
+        "", 
+        "<img src='assets/images/artists/lynyrdSkynyrd.jpg' alt='Lynyrd Skynyrd album cover'>"
+    )
 
-    const art9 = {
-        name: "Aerosmith", 
-        song: "Dream On", 
-        audio: "", 
-        img: "<img src='assets/images/artists/aerosmith.jpg' alt='Aerosmith album cover'>"
-};
+    const art9 = new Artist (
+        "Aerosmith", 
+        "Dream On", 
+        "", 
+        "<img src='assets/images/artists/aerosmith.jpg' alt='Aerosmith album cover'>"
+    )
 
-    const art10 = {
-        name: "The Knack", 
-        song: "My Sharona", 
-        audio: "", 
-        img: "<img src='assets/images/artists/theKnack.jpg' alt='The Knack album cover'>"
-};
+    const art10 = new Artist (
+        "The Knack", 
+        "My Sharona", 
+        "", 
+        "<img src='assets/images/artists/theKnack.jpg' alt='The Knack album cover'>"
+    )
 
-    const art11 = {
-        name: "Elton John", 
-        song: "Tiny Dancer",
-        audio: "", 
-        img: "<img src='assets/images/artists/eltonJohn.jpg' alt='Elton John album cover'>"
-};
+    const art11 = new Artist (
+        "Elton John", 
+        "Tiny Dancer",
+        "", 
+        "<img src='assets/images/artists/eltonJohn.jpg' alt='Elton John album cover'>"
+    )
 
-    const art12 = {
-        name: "Wild Cherry", 
-        song: "Play That Funky Music", 
-        audio: "", 
-        img: "<img src='assets/images/artists/wildCherry.jpg' alt='Wild Cherry album cover'>"
-};
+    const art12 = new Artist (
+        "Wild Cherry", 
+        "Play That Funky Music", 
+        "", 
+        "<img src='assets/images/artists/wildCherry.jpg' alt='Wild Cherry album cover'>"
+    )
 
     // array of artist objects
     const artists = [art1, art2, art3, art4, art5, art6, art7, art8, art9, art10, art11, art12];
@@ -162,7 +168,7 @@
     // initializes game
     var initialize = function() {
         computerGuess = artists[Math.floor(Math.random() * artists.length)];
-        image = computerGuess.img;
+        image = computerGuess.image;
         cgN = computerGuess.name.toLowerCase();
         guessesRem = parseInt(cgN.length - 2); // determining # of guesses 
         charNum = [];
@@ -172,17 +178,42 @@
         for (var i = 0; i < cgN.length; i++) {
             charNum.push("_");
         }
-        // check for space in the artists name and converts the space to | - ***need to figure out how to keep the space instead of |
+        // check for space in the artists name and converts the space to | - ***need to figure out how to keep the space instead of |********************************
         if (cgN.indexOf(" ") !== -1) {
             ind = cgN.indexOf(" "); 
             charNum.splice(ind, 1, " | ");
             wordUp();
-
         }
         else {
             wordUp();
         }
     }
+
+    var finalGuess = function() {
+        // final guess doesn't match
+        if (guessesRem === 1 && ! cgN.includes(userGuess)) {
+        alert("'" + userGuess + "' is incorrect. You're out of guesses, you lose!");
+        initialize();
+        }
+
+        // letter matches a letter(s) in artist name
+        else if (cgN.includes(userGuess)) {
+            // what cgn index is userguess found
+            for (var j = 0; j < (cgN.length); j++) {
+                if (cgN[j] === userGuess) {
+                    charNum[j] = userGuess;
+                    wordUp();     
+                    winEval();                 
+                }
+            }
+        }
+        // validation criteria met but guess doesn't match
+        else {
+            guessesRem--;
+            print();
+        }
+    }
+
 
     // increase win counter by 1
     var winCount = function() {
@@ -196,19 +227,19 @@
     }();
 
     // evaluate if the user has won or not
-    var winEval = function() {
-        if ( ! charNum.includes("_" || "|")) {
-            console.log("win");
-            win(); // will call win() instead
+    var winEval = function() {                   
+        if ( ! charNum.includes("_")) {      
+            win(); 
         }
         else {
-            console.log("keep going");
+            console.log("keep going"); // if you didn't win what's next
         }
     }
 
     var win = function() {
         // put pic in html
         artImage.innerHTML = image;
+        // user computerGuess.name when win - this keeps capitalization
         // play song
         // display artist name
         // display song name
@@ -223,41 +254,15 @@
 
 initialize()
 
-// when a key is pressed
-document.onkeyup = function (event) {
-    userGuess = event.key.toLowerCase(); 
 
-    // verifying input is a letter
-    if (alphaArr.includes(userGuess)) {
+document.onkeyup = function (event) {       // when a key is pressed
+    userGuess = event.key.toLowerCase();        // userGuess is set to the pressed key
 
-        // verifying input is not a duplicate
-        if (! guesses.includes(userGuess)) {
-        guesses.push(userGuess); // keeping track of what letters have been used
-
-            // final guess doesn't match
-            if (guessesRem === 1 && ! cgN.includes(userGuess)) {
-                alert("'" + userGuess + "' is incorrect. You're out of guesses, you lose!");
-                initialize();
-            }
-
-            // letter matches a letter(s) in artist name
-            else if (cgN.includes(userGuess)) {
-                // what cgn index is userguess found
-                for (var j = 0; j < (cgN.length); j++) {
-                    if (cgN[j] === userGuess) {
-                        charNum[j] = userGuess;
-                        wordUp();     
-                        winEval();                 
-                    }
-                }
-            }
-
-            // validation criteria met but guess doesn't match
-            else {
-                guessesRem--;
-                print();
-            }
-
+    if (alphaArr.includes(userGuess)) {     // verify userGuess is a letter
+        
+        if (! guesses.includes(userGuess)) {        // verify input is not a duplicate
+            guesses.push(userGuess);        // add userGuess to guesses array to keep track of what letters have been used
+            finalGuess();
         } 
 
         // duplicate entry
@@ -275,4 +280,4 @@ document.onkeyup = function (event) {
     }
 }
 
-// user computerGuess.name when win - this keeps capitalization
+

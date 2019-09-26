@@ -11,6 +11,8 @@ p {
 }
 
 img {
-    border-radius: 80%;
+    border-radius: 20%;
     border: 2px solid white;
+    height: 350px;
+    width: auto;
 }
