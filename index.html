@@ -6,22 +6,51 @@
             Word Guess Game - 70's Style!
         </title>
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
     <body>
         <header>
-            <br>
-            <h1>Word Guess Game</h1>
-            <h2>70's Bands Edition</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Word Guess Game - 70's Edition</h1>
+                    </div>
+                </div>
+            </div>
         </header>
+        <hr>
         <main>
-            <h3>Press any letter to get started!</h3>
-            <p>Word:</p><span id="band">test</span>
-            <p>Wins:</p><span id="wins">0</span>
-            <p>Number of Guesses Remaining:</p><span id="guessnum">test</span>
-            <p>Letters Already Guessed:</p><span id="guesses">test</span>
-            <br><br>
-            <div id="image"></div>
+            <div class="container">
+                <div class="row" id="topStuff">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3>Press any letter to get started!</h3>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row" id="middleStuff">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <p>Word:</p><span id="band">test</span>
+                        <p>Wins:</p><span id="wins">0</span>
+                        <p>Number of Guesses Remaining:</p><span id="guessnum">test</span>
+                        <p>Letters Already Guessed:</p><span id="guesses">test</span>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row" id="winStuff">
+                    <div class="col-4">
+                        <div id="image"></div>
+                    </div>
+                    <div class="col-4">
+                        <div id="outcome"></div>
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
 
