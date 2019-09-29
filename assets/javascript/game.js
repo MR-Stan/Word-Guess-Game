@@ -1,274 +1,253 @@
-// blanks are displayed as " " instead of "|"
+// blanks need to displayed as " " instead of "|"
 // initial song music is played
 // on win -> song changes to artist, picture updates, song title and artist are displayed, game resets
 // last key pressed is showing up on next round
 // remove commas from letters guessed and increase space between -- or do board like the fridge example
-// no repeat until all songs have been picked - define artists array in initialze, after computerGuess is chosen remove the item from artists array
+// no repeat until all songs have been picked - define artists array in initialze, acomputerGuess is chosen remove the item from artists array
 // function to convert array to string and uppercase it. 
 // need to print uppercase guesses
 // add music to object
-// get rid of nested functions
 
 // ******************************************************************* GLOBAL VARIABLES ***************************************************************** //
 
-const guessNumText = document.getElementById("guessnum");   // number of guesses remaining    
+const guessesRemainingText = document.getElementById("guessesRemaining");   // number of guesses remaining    
 
 const guessText = document.getElementById("guesses");       // letters already guessed
 
-const bandText = document.getElementById("band");           // current unknown word w/ blanks and letters guessed
+const wordText = document.getElementById("word");           // current unknown word w/ blanks and letters guessed
 
 const artImage = document.getElementById("image");          // artists image
+
+const outcomeText = document.getElementById("outcome"); 
+
+const spotify = document.getElementById("spotify");
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------ // 
 
 // ******************************************************************* ARTIST OBJECTS ******************************************************************* //
 
-const art1 = {
-    name: "Deep Purple",
-    title: "Smoke on the Water", 
-    audio: "",
-    image: "<img src='assets/images/artists/deepPurple.jpg' alt='Deep Purple album cover'>"
-};
+var gameObject = {
 
-const art2 = { 
-    name: "Queen", 
-    title: "Bohemian Rhapsody", 
-    audio: "",
-    image: "<img src='assets/images/artists/queen.jpg' alt='Queen album cover'>"
-};
+    art1 : {
+        name: "Deep Purple",
+        title: "Smoke on the Water", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/5SAUIWdZ04OxYfJFDchC7S" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        image: "<img src='assets/images/artists/deepPurple.jpg' alt='Deep Purple album cover'>"
+    },
 
-const art3 = { 
-    name: "Pink Floyd", 
-    title: "Comfortably Numb",
-    audio: "",
-    image: "<img src='assets/images/artists/pinkFloyd.png' alt='Pink Floyd album cover'>"
-};
+    art2 : { 
+        name: "Queen", 
+        title: "Bohemian Rhapsody", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/6l8GvAyoUZwWDgF1e4822w" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        image: "<img src='assets/images/artists/queen.jpg' alt='Queen album cover'>"
+    },
 
-const art4 = { 
-    name: "Led Zeppelin", 
-    title: "Black Dog", 
-    audio: "",
-    image: "<img src='assets/images/artists/ledZeppelin.jpg' alt='Led Zeppelin album cover'>"
-};
+    art3 : { 
+        name: "Pink Floyd", 
+        title: "Comfortably Numb",
+        audio: '<iframe src="https://open.spotify.com/embed/track/5HNCy40Ni5BZJFw1TKzRsC" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        image: "<img src='assets/images/artists/pinkFloyd.png' alt='Pink Floyd album cover'>"
+    },
 
-const art5 = { 
-    name: "Eric Clapton", 
-    title: "Layla", 
-    audio: "", 
-    image: "<img src='assets/images/artists/ericClapton.jpg' alt='Eric Clapton album cover'>"
-};
+    art4 : { 
+        name: "Led Zeppelin", 
+        title: "Black Dog", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/3qT4bUD1MaWpGrTwcvguhb" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        image: "<img src='assets/images/artists/ledZeppelin.jpg' alt='Led Zeppelin album cover'>"
+    },
 
-const art6 = { 
-    name: "The Who", 
-    title: "Baba O'Riley", 
-    audio: "", 
-    image: "<img src='assets/images/artists/theWho.jpg' alt='The Who album cover'>"
-};
+    art5: { 
+        name: "Eric Clapton", 
+        title: "Layla", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/3gce83TvahSnFHFtCqbe4R" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        image: "<img src='assets/images/artists/ericClapton.jpg' alt='Eric Clapton album cover'>"
+    },
 
-const art7 = { 
-    name: "Santana", 
-    title: "Black Magic Woman", 
-    audio: "", 
-    image: "<img src='assets/images/artists/santana.jpg' alt='Santana album cover'>"
-};
+    art6: { 
+        name: "The Who", 
+        title: "Baba O'Riley", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/3qiyyUfYe7CRYLucrPmulD" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        image: "<img src='assets/images/artists/theWho.jpg' alt='The Who album cover'>"
+    },
 
-const art8 = { 
-    name: "Lynyrd Skynyrd", 
-    title: "Sweet Home Alabama", 
-    audio: "", 
-    image: "<img src='assets/images/artists/lynyrdSkynyrd.jpg' alt='Lynyrd Skynyrd album cover'>"
-};
+    art7: { 
+        name: "Santana", 
+        title: "Black Magic Woman", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/7e89621JPkKaeDSTQ3avtg" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        image: "<img src='assets/images/artists/santana.jpg' alt='Santana album cover'>"
+    },
 
-const art9 = { 
-    name: "Aerosmith", 
-    title: "Dream On", 
-    audio: "",
-    image: "<img src='assets/images/artists/aerosmith.jpg' alt='Aerosmith album cover'>"
-};
+    art8: { 
+        name: "Lynyrd Skynyrd", 
+        title: "Sweet Home Alabama", 
+        audio: '', 
+        image: "<img src='assets/images/artists/lynyrdSkynyrd.jpg' alt='Lynyrd Skynyrd album cover'>"
+    },
 
-const art10 = { 
-    name: "The Knack", 
-    title: "My Sharona", 
-    audio: "", 
-    image: "<img src='assets/images/artists/theKnack.jpg' alt='The Knack album cover'>"
-};
+    art9: { 
+        name: "Aerosmith", 
+        title: "Dream On", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/5MxNLUsfh7uzROypsoO5qe" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        image: "<img src='assets/images/artists/aerosmith.jpg' alt='Aerosmith album cover'>"
+    },
 
-const art11 = { 
-    name: "Elton John", 
-    title: "Tiny Dancer",
-    audio: "", 
-    image: "<img src='assets/images/artists/eltonJohn.jpg' alt='Elton John album cover'>"
-};
+    art10 : { 
+        name: "The Knack", 
+        title: "My Sharona", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/1HOMkjp0nHMaTnfAkslCQj" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        image: "<img src='assets/images/artists/theKnack.jpg' alt='The Knack album cover'>"
+    },
 
-const art12 = { 
-    name: "Wild Cherry", 
-    title: "Play That Funky Music", 
-    audio: "", 
-    image: "<img src='assets/images/artists/wildCherry.jpg' alt='Wild Cherry album cover'>"
-};
+    art11 : { 
+        name: "Elton John", 
+        title: "Tiny Dancer",
+        audio: '<iframe src="https://open.spotify.com/embed/track/2TVxnKdb3tqe1nhQWwwZCO" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        image: "<img src='assets/images/artists/eltonJohn.jpg' alt='Elton John album cover'>"
+    },
 
-// ------------------------------------------------------------------------------------------------------------------------------------------------------ // 
-
-// array of artist objects
-const artists = [art1, art2, art3, art4, art5, art6, art7, art8, art9, art10, art11, art12];
-
-
-var computerGuess = [];              // computer's artist selection
-
-var cgN = "";                        // computerGuess.name    
-
-var guesses = [];                    // array of letters selected during current round
-
-var userGuess = "";                  // user's letter guess
-
-var guessesRem = 0;                 // guesses remaining this round 
-
-var charNum = [];                    // array for number of characters of computerGuess
-
-var band;                       // updated 'x' with spaces instead of commas
-
-var ind;                        // index of space in cgN (computerGuess.name)
-
-var letind;                     // index of letter in word that matches userGuess
-
-var image;
-
-
-// should be able to place these where they go and exclude this function
-
-var print = function() { // rename arrayToString
-    let guessesStr = guesses.toString();
-    guessesStr = guessesStr.replace(/,/g, " ");
-
-    guessNumText.innerText = guessesRem;
-    guessText.innerText = guesses;
-    bandText.innerText = band;
-}
-
-// should be able to place these where they go and exclude this function
-var wordUp = function() {
-    let x = charNum.toString();
-    band = x.replace(/,/g, " ");
-    print();
-}
-
-// initializes game
-var initialize = function() {
-    computerGuess = artists[Math.floor(Math.random() * artists.length)];
-    image = computerGuess.image;
-    cgN = computerGuess.name.toLowerCase();
-    guessesRem = parseInt(cgN.length - 2); // determining # of guesses 
-    charNum = [];
-    guesses = [];
-    print();
-    // determine the number of characters in computerGuess
-    for (var i = 0; i < cgN.length; i++) {
-        charNum.push("_");
-    }
-    // check for space in the artists name and converts the space to | - ***need to figure out how to keep the space instead of |********************************
-    if (cgN.indexOf(" ") !== -1) {
-        ind = cgN.indexOf(" "); 
-        charNum.splice(ind, 1, " | ");
-        wordUp();
-
-    }
-    else {
-        wordUp();
-    }
-}
-
-var finalGuess = function() {
-    // final guess doesn't match
-    if (guessesRem === 1 && ! cgN.includes(userGuess)) {
-    alert("'" + userGuess + "' is incorrect. You're out of guesses, you lose!");
-    initialize();
-    }
-
-    // letter matches a letter(s) in artist name
-    else if (cgN.includes(userGuess)) {
-        // what cgn index is userguess found
-        for (var j = 0; j < (cgN.length); j++) {
-            if (cgN[j] === userGuess) {
-                charNum[j] = userGuess;
-                wordUp();     
-                winEval();                 
-            }
-        }
-    }
-    // validation criteria met but guess doesn't match
-    else {
-        guessesRem--;
-        print();
-    }
-}
-
-// increase win counter by 1
-var winCount = function() {
-    let winCounter = 0;
-    return function() {
-        winCounter += 1; 
-        const winText = document.getElementById("wins");  
-        winText.innerText = winCounter;
-        return winCounter;
-    }
-}();
-
-// evaluate if the user has won or not
-var winEval = function() {                   
-    if ( ! charNum.includes("_")) {      
-        win(); 
-    }
-    else {
-        console.log("keep going"); // if you didn't win what's next
-    }
-}
-
-var win = function() {
-    artImage.innerHTML = image;
-    // user computerGuess.name when win - this keeps capitalization
-    // play song
-    // display artist name
-    // display song name
-    winCount();
-    initialize();
-}
-
-
+    art12 : { 
+        name: "Wild Cherry", 
+        title: "Play That Funky Music", 
+        audio: '<iframe src="https://open.spotify.com/embed/track/5uuJruktM9fMdN9Va0DUMl" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        image: "<img src='assets/images/artists/wildCherry.jpg' alt='Wild Cherry album cover'>"
+    },
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------ //
+    computerGuess : "",
+    blankWord : [],
+    guesses : [],
+    userGuess : "",
+    guessesRemaining: "",
+
+    // initializes game
+    initialize : function() {
+        // play initial music
+        // display initial image
+        // display directions?
+        this.reset();
+        //guessText.innerText = "";
+    },
 
 
-// ********************************************************************** GAME LOOP ********************************************************************* //
+    reset : function () {
+        var artists = [this.art1, this.art2, this.art3, this.art4, this.art5, this.art6, this.art7, this.art8, this.art9, this.art10, this.art11, this.art12];
+        computerGuess = (artists[Math.floor(Math.random() * artists.length)]);
+        computerGuess.name = computerGuess.name.toLowerCase();
+        blankWord = [];
+        this.guesses = [];
 
-initialize()
+        // determine the number of charactercomputerGuess
+        for (var i = 0; i < computerGuess.name.length; i++) {
+            blankWord.push("_");
+        }
+          // check for space in the artists name and converts the space to | - ***need to figure out how to keep the space instead of |********************************
+        if (computerGuess.name.indexOf(" ") !== -1) {
+            var ind = computerGuess.name.indexOf(" "); 
+            blankWord.splice(ind, 1, " | ");
 
-// array of the alphabet used to validate userGuess
-const alphaArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        }
+        var word = blankWord.toString();
+        word = word.replace(/,/g, " ");
+        wordText.innerText = word;
+        console.log(word);
 
+        //let guessesStr = guesses.toString();
+        //guessesStr = guessesStr.replace(/,/g, " ");
+        guessText.innerText = "";//guessesStr;
 
-document.onkeyup = function (event) {       // when a key is pressed
-userGuess = event.key.toLowerCase();        // userGuess is set to the pressed key
-
-if (alphaArr.includes(userGuess)) {     // verify userGuess is a letter
+        guessesRemaining = parseInt(computerGuess.name.length - 2); // determining # of guesses 
+        guessesRemainingText.innerText = guessesRemaining;
+        console.log(guessesRemaining);
+    },
     
-    if (! guesses.includes(userGuess)) {        // verify input is not a duplicate
-        guesses.push(userGuess);        // add userGuess to guesses array to keep track of what letters have been used
-        finalGuess();
-    } 
+    // increase win counter by 1
+    winCount : function() {
+        let winCounter = 0;
+        return function() {
+            winCounter += 1; 
+            const winText = document.getElementById("wins");  
+            winText.innerText = winCounter;
+            return winCounter;
+        }
+    }(),
 
-    // duplicate entry
-    else {
-        alert("You've already used '" + userGuess + "'. Try again.");
-        print();
+    win : function() {
+        var image = computerGuess.image;
+        
+        artImage.innerHTML = image;
+        // play song
+        spotify.innerHTML = computerGuess.audio;
+        // capitalize computerGuess.name
+        outcomeText.innerHTML = computerGuess.title + "<br> by <br>" + computerGuess.name;
+        this.winCount();
+        this.reset();
+    },
+
+
+    validateEntry : function() {
+        var alphabetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+        // verify that userGuess is a letter
+        if (alphabetArray.includes(this.userGuess)) {     
+            console.log("it's a letter");
+            
+            // check if userGuess is not a duplicate
+            if (! this.guesses.includes(this.userGuess)) {        
+                console.log("not a duplicate");
+                // if not duplicate, add to array of letters guessed
+                this.guesses.push(this.userGuess);       
+                guessText.innerText = this.guesses;
+                // if on final guess the word does not include the userGuess then lose
+                if (guessesRemaining === 1 && ! computerGuess.name.includes(this.userGuess)) {
+                    console.log("you lose");
+                    alert("'" + this.userGuess + "' is incorrect. You're out of guesses, you lose!");
+                    this.reset();
+                    }
+                    // else if a letter matches a letter(s) in artist name
+                else if (computerGuess.name.includes(this.userGuess)) {
+                    console.log(computerGuess.name);
+                    // the indecomputerGuess.name at which userGuess is found
+                    for (var j = 0; j < (computerGuess.name.length); j++) {
+                        if (computerGuess.name[j] === this.userGuess) {
+                            blankWord[j] = this.userGuess; // used twice can do function
+                            word = blankWord.toString();
+                            word = word.replace(/,/g, " ");
+                            wordText.innerText = word;   
+                            if ( ! blankWord.includes("_")) {      
+                                this.win();                
+                            }
+                        }
+                    }
+                }
+                // else not last guess but userGuess doesn't match the word
+                else {
+                    guessesRemaining--;
+                    guessesRemainingText.innerText = guessesRemaining;
+                }
+            }   
+            // if duplicate entry
+            else {
+                alert("You've already used '" + this.userGuess + "'. Try again.");
+            }
+        } 
+        // if userGuess is not a letter
+        else {      
+            let alphaString = alphabetArray.toString();
+            alphaString = alphaString.replace(/,/g, "  ");
+            alert("'" + event.key + "' is not a letter. Press one of these:  \n" + alphaString);
+        }
     }
 }
 
-// entry is not a letter
-else {
-    let alphaString = alphaArr.toString();
-    alphaString = alphaString.replace(/,/g, " ");
-    alert("'" + event.key + "' is not a letter. Press one of these: " + alphaArr);
-}
+
+// Initiate game when window loads
+window.onload = function () {
+    gameObject.initialize();
 }
 
+// Game loop
+document.onkeyup = function (event) { 
+    gameObject.userGuess = event.key.toLowerCase();
+    gameObject.validateEntry();
+}
 
