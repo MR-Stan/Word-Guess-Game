@@ -73,7 +73,7 @@ var gameObject = {
     art7: { 
         name: "Santana", 
         title: "Black Magic Woman", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/7e89621JPkKaeDSTQ3avtg" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        audio: '', 
         image: "<img src='assets/images/artists/santana.jpg' alt='Santana album cover'>"
     },
 
@@ -121,7 +121,7 @@ var gameObject = {
 
     // initializes game
     initialize : function() {
-        // play initial music
+        
         // display initial image
         // display directions?
         this.reset();
@@ -149,7 +149,7 @@ var gameObject = {
         var word = blankWord.toString();
         word = word.replace(/,/g, " ");
         wordText.innerText = word;
-        console.log(word);
+
 
         //let guessesStr = guesses.toString();
         //guessesStr = guessesStr.replace(/,/g, " ");
@@ -178,34 +178,30 @@ var gameObject = {
         // play song
         spotify.innerHTML = computerGuess.audio;
         // capitalize computerGuess.name
-        outcomeText.innerHTML = computerGuess.title + "<br> by <br>" + computerGuess.name;
+        outcomeText.innerHTML =  "Congratulations you correctly guessed " + computerGuess.name;
         this.winCount();
         this.reset();
     },
 
 
-    validateEntry : function() {
+    main : function() {
         var alphabetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
         // verify that userGuess is a letter
         if (alphabetArray.includes(this.userGuess)) {     
-            console.log("it's a letter");
             
             // check if userGuess is not a duplicate
             if (! this.guesses.includes(this.userGuess)) {        
-                console.log("not a duplicate");
                 // if not duplicate, add to array of letters guessed
                 this.guesses.push(this.userGuess);       
                 guessText.innerText = this.guesses;
                 // if on final guess the word does not include the userGuess then lose
                 if (guessesRemaining === 1 && ! computerGuess.name.includes(this.userGuess)) {
-                    console.log("you lose");
                     alert("'" + this.userGuess + "' is incorrect. You're out of guesses, you lose!");
                     this.reset();
                     }
                     // else if a letter matches a letter(s) in artist name
                 else if (computerGuess.name.includes(this.userGuess)) {
-                    console.log(computerGuess.name);
                     // the indecomputerGuess.name at which userGuess is found
                     for (var j = 0; j < (computerGuess.name.length); j++) {
                         if (computerGuess.name[j] === this.userGuess) {
@@ -248,6 +244,6 @@ window.onload = function () {
 // Game loop
 document.onkeyup = function (event) { 
     gameObject.userGuess = event.key.toLowerCase();
-    gameObject.validateEntry();
+    gameObject.main();
 }
 

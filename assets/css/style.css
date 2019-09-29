@@ -30,7 +30,7 @@ p {
 img {
     border-radius: 5%;
     border: 2px solid white;
-    height: 350px;
+    height: 250px;
     width: auto;
 }
 
@@ -60,4 +60,51 @@ footer {
 
 h1 {
     padding: 0;
+}
+
+#main {
+    display: grid;
+    grid-template-rows: 10% 20% 20% auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto;
+}
+
+#heading {
+    grid-area: 1 / 1 / 2 / 4;
+    border: 1px solid black;
+}
+
+#wordDiv {
+    grid-area: 2 / 2 / 3 / 3; 
+    border: 1px solid black;
+}
+
+#guessesDiv {
+    grid-area: 3 / 2 / 4 / 3;
+    border: 1px solid black;
+}
+
+#winsDiv {
+    grid-area:  2 / 3 / 3 / 4;
+    border: 1px solid black;
+}
+
+#guessesRemainingDiv {
+    grid-area:  3 / 3 / 4 / 4; 
+    border: 1px solid black;
+}
+
+#imageDiv {
+    grid-area:  4 / 3 / 5 / 4;
+    border: 1px solid black;
+}
+
+#outcomeDiv {
+    grid-area:  4 / 2 / 5 / 3;
+    border: 1px solid black;
+}
+
+#spotifyDIv {
+    grid-area:  1 / 1 / 5 / 2;
+    border: 1px solid black;
 }
