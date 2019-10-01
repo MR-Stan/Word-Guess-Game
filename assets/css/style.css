@@ -17,9 +17,9 @@ body {
 }
 
 h1 {
-    padding: 1%;
     font-size: 3em;
     margin-top: 1%;
+    padding: 0;
 }
 
 p {
@@ -28,9 +28,7 @@ p {
 }
 
 img {
-    border-radius: 5%;
-    border: 2px solid white;
-    height: 250px;
+    height: 300px;
     width: auto;
 }
 
@@ -58,10 +56,6 @@ footer {
     grid-area: 5 / 1 / 6 / 4;
 }
 
-h1 {
-    padding: 0;
-}
-
 #main {
     display: grid;
     grid-template-rows: 10% 20% 20% auto;
@@ -69,42 +63,49 @@ h1 {
     margin: auto;
 }
 
+.container {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
 #heading {
     grid-area: 1 / 1 / 2 / 4;
-    border: 1px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 #wordDiv {
     grid-area: 2 / 2 / 3 / 3; 
-    border: 1px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 #guessesDiv {
     grid-area: 3 / 2 / 4 / 3;
-    border: 1px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 #winsDiv {
     grid-area:  2 / 3 / 3 / 4;
-    border: 1px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 #guessesRemainingDiv {
     grid-area:  3 / 3 / 4 / 4; 
-    border: 1px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 #imageDiv {
     grid-area:  4 / 3 / 5 / 4;
-    border: 1px solid black;
 }
 
 #outcomeDiv {
     grid-area:  4 / 2 / 5 / 3;
-    border: 1px solid black;
+    line-height: 1000%;
 }
 
 #spotifyDIv {
     grid-area:  1 / 1 / 5 / 2;
-    border: 1px solid black;
 }

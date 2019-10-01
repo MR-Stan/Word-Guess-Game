@@ -1,12 +1,7 @@
-// blanks need to displayed as " " instead of "|"
-// initial song music is played
-// on win -> song changes to artist, picture updates, song title and artist are displayed, game resets
 // last key pressed is showing up on next round
-// remove commas from letters guessed and increase space between -- or do board like the fridge example
+// remove commas from letters guessed and increase space between 
 // no repeat until all songs have been picked - define artists array in initialze, acomputerGuess is chosen remove the item from artists array
-// function to convert array to string and uppercase it. 
 // need to print uppercase guesses
-// add music to object
 
 // ******************************************************************* GLOBAL VARIABLES ***************************************************************** //
 
@@ -18,9 +13,9 @@ const wordText = document.getElementById("word");           // current unknown w
 
 const artImage = document.getElementById("image");          // artists image
 
-const outcomeText = document.getElementById("outcome"); 
+const outcomeText = document.getElementById("outcome");     // initially game instructions, then win / lose message based on outcome
 
-const spotify = document.getElementById("spotify");
+const spotify = document.getElementById("spotify");         // embedded spotify player
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------ // 
 
@@ -31,84 +26,84 @@ var gameObject = {
     art1 : {
         name: "Deep Purple",
         title: "Smoke on the Water", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/5SAUIWdZ04OxYfJFDchC7S" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        audio: '<iframe src="https://open.spotify.com/embed/track/5SAUIWdZ04OxYfJFDchC7S" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
         image: "<img src='assets/images/artists/deepPurple.jpg' alt='Deep Purple album cover'>"
     },
 
     art2 : { 
         name: "Queen", 
         title: "Bohemian Rhapsody", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/6l8GvAyoUZwWDgF1e4822w" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        audio: '<iframe src="https://open.spotify.com/embed/track/6l8GvAyoUZwWDgF1e4822w" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
         image: "<img src='assets/images/artists/queen.jpg' alt='Queen album cover'>"
     },
 
     art3 : { 
         name: "Pink Floyd", 
         title: "Comfortably Numb",
-        audio: '<iframe src="https://open.spotify.com/embed/track/5HNCy40Ni5BZJFw1TKzRsC" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        audio: '<iframe src="https://open.spotify.com/embed/track/5HNCy40Ni5BZJFw1TKzRsC" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
         image: "<img src='assets/images/artists/pinkFloyd.png' alt='Pink Floyd album cover'>"
     },
 
     art4 : { 
         name: "Led Zeppelin", 
         title: "Black Dog", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/3qT4bUD1MaWpGrTwcvguhb" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        audio: '<iframe src="https://open.spotify.com/embed/track/3qT4bUD1MaWpGrTwcvguhb" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
         image: "<img src='assets/images/artists/ledZeppelin.jpg' alt='Led Zeppelin album cover'>"
     },
 
     art5: { 
         name: "Eric Clapton", 
         title: "Layla", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/3gce83TvahSnFHFtCqbe4R" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/3gce83TvahSnFHFtCqbe4R" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/ericClapton.jpg' alt='Eric Clapton album cover'>"
     },
 
     art6: { 
         name: "The Who", 
         title: "Baba O'Riley", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/3qiyyUfYe7CRYLucrPmulD" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/3qiyyUfYe7CRYLucrPmulD" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/theWho.jpg' alt='The Who album cover'>"
     },
 
     art7: { 
         name: "Santana", 
         title: "Black Magic Woman", 
-        audio: '', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/4YMQXzscifAREG0a7KNGhB" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/santana.jpg' alt='Santana album cover'>"
     },
 
     art8: { 
         name: "Lynyrd Skynyrd", 
         title: "Sweet Home Alabama", 
-        audio: '', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/7e89621JPkKaeDSTQ3avtg" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/lynyrdSkynyrd.jpg' alt='Lynyrd Skynyrd album cover'>"
     },
 
     art9: { 
         name: "Aerosmith", 
         title: "Dream On", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/5MxNLUsfh7uzROypsoO5qe" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
+        audio: '<iframe src="https://open.spotify.com/embed/track/5MxNLUsfh7uzROypsoO5qe" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
         image: "<img src='assets/images/artists/aerosmith.jpg' alt='Aerosmith album cover'>"
     },
 
     art10 : { 
         name: "The Knack", 
         title: "My Sharona", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/1HOMkjp0nHMaTnfAkslCQj" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/1HOMkjp0nHMaTnfAkslCQj" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/theKnack.jpg' alt='The Knack album cover'>"
     },
 
     art11 : { 
         name: "Elton John", 
         title: "Tiny Dancer",
-        audio: '<iframe src="https://open.spotify.com/embed/track/2TVxnKdb3tqe1nhQWwwZCO" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/2TVxnKdb3tqe1nhQWwwZCO" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/eltonJohn.jpg' alt='Elton John album cover'>"
     },
 
     art12 : { 
         name: "Wild Cherry", 
         title: "Play That Funky Music", 
-        audio: '<iframe src="https://open.spotify.com/embed/track/5uuJruktM9fMdN9Va0DUMl" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
+        audio: '<iframe src="https://open.spotify.com/embed/track/5uuJruktM9fMdN9Va0DUMl" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', 
         image: "<img src='assets/images/artists/wildCherry.jpg' alt='Wild Cherry album cover'>"
     },
 
@@ -122,10 +117,9 @@ var gameObject = {
     // initializes game
     initialize : function() {
         
-        // display initial image
-        // display directions?
+        // display directions
         this.reset();
-        //guessText.innerText = "";
+        // guessText.innerText = "";
     },
 
 
@@ -136,11 +130,11 @@ var gameObject = {
         blankWord = [];
         this.guesses = [];
 
-        // determine the number of charactercomputerGuess
+        // determine the number of characters in computerGuess
         for (var i = 0; i < computerGuess.name.length; i++) {
             blankWord.push("_");
         }
-          // check for space in the artists name and converts the space to | - ***need to figure out how to keep the space instead of |********************************
+          // check for space in the artists name and converts the space to '|'
         if (computerGuess.name.indexOf(" ") !== -1) {
             var ind = computerGuess.name.indexOf(" "); 
             blankWord.splice(ind, 1, " | ");
@@ -149,15 +143,9 @@ var gameObject = {
         var word = blankWord.toString();
         word = word.replace(/,/g, " ");
         wordText.innerText = word;
-
-
-        //let guessesStr = guesses.toString();
-        //guessesStr = guessesStr.replace(/,/g, " ");
-        guessText.innerText = "";//guessesStr;
-
-        guessesRemaining = parseInt(computerGuess.name.length - 2); // determining # of guesses 
+        guessText.innerText = "";
+        guessesRemaining = parseInt(computerGuess.name.length - 2); 
         guessesRemainingText.innerText = guessesRemaining;
-        console.log(guessesRemaining);
     },
     
     // increase win counter by 1
